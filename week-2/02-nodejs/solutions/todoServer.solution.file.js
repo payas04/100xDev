@@ -22,14 +22,14 @@ function removeAtIndex(arr, index) {
 }
 
 app.get('/todos', (req, res) => {
-  fs.readFile("todos.json", "utf8", function(err, data) {
+  fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     res.json(JSON.parse(data));
   });
 });
 
 app.get('/todos/:id', (req, res) => {
-  fs.readFile("todos.json", "utf8", function(err, data) {
+  fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     const todos = JSON.parse(data);
     const todoIndex = findIndex(todos, parseInt(req.params.id));
@@ -41,7 +41,7 @@ app.get('/todos/:id', (req, res) => {
   });
 });
 
-app.post('/todos', function(req, res) {
+app.post('/todos', (req, res) => {
   const newTodo = {
     id: Math.floor(Math.random() * 1000000), // unique random id
     title: req.body.title,
@@ -58,7 +58,7 @@ app.post('/todos', function(req, res) {
   });
 });
 
-app.put('/todos/:id', function(req, res) {
+app.put('/todos/:id', (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     const todos = JSON.parse(data);
@@ -80,11 +80,11 @@ app.put('/todos/:id', function(req, res) {
   });
 });
 
-app.delete('/todos/:id', function(req, res) {
+app.delete('/todos/:id', (req, res) => {
 
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
-    let todos = JSON.parse(data);
+    const todos = JSON.parse(data);
     const todoIndex = findIndex(todos, parseInt(req.params.id));
     if (todoIndex === -1) {
       res.status(404).send();
