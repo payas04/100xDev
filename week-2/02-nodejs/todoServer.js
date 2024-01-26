@@ -41,9 +41,70 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const app = express();
-
 app.use(bodyParser.json());
+const todos = [];
 
-module.exports = app;
+app.get('/todos',(req,res)=>{
+  res.status(200).json(todos);
+})
+
+app.get('/todos/:id', (req, res) => {
+  const searchId = parseInt(req.params.id);
+
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].id === searchId) {
+      return res.status(200).json(todos[i]);
+    }
+  }
+
+  // If the loop completes without finding a matching todo, send a 404 response
+  res.status(404).send("Not Found");
+});
+
+
+app.post('/todos',(req,res)=>{
+  const newtodo = {
+    id : Math.floor(Math.random() * 10000),
+    title : req.body.title,
+    completed : Boolean(req.body.completed),
+    description: req.body.description
+    };
+    todos.push(newtodo);
+    res.status(200).send(`Created with ${newtodo.id}`);
+
+  }
+)
+app.put('/todos/:id', (req, res) => {
+  const updateId = parseInt(req.params.id);
+
+  for (let i = 0; i < todos.length; i++) {
+    if (updateId === todos[i].id) {
+      // Update the fields of that todo item
+      todos[i].title = req.body.title;
+      todos[i].completed = Boolean(req.body.completed);
+      todos[i].description = req.body.description;
+      res.status(200).json({ message: 'Todo updated successfully', updatedTodo: todos[i] });
+      return; // Exit the loop once the update is done
+    }
+  }
+  // If the loop completes without finding a matching todo, send a 404 response
+  res.status(404).json({ message: 'Todo not found' });
+});
+
+app.delete('/todos/:id', (req,res)=>{ 
+    const deleteid = parseInt(req.params.id);
+    const indexToDelete = todos.findIndex(function(todo) {
+      return todo.id === deleteid;
+    });
+    if (indexToDelete > -1) {
+      todos.splice(indexToDelete, 1);
+      res.status(200).json({message:"Deleted Successfully"});
+      } else{
+        res.status(404).json({message:'ID Not Found!'})
+        }
+
+})
+
+app.listen(5000);
+
