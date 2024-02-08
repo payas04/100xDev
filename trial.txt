@@ -1,0 +1,4 @@
+neondb: postgresql://payaspatel:zjfJYu7RZHE9@ep-patient-poetry-a5qelbyk.us-east-2.aws.neon.tech/neondb?sslmode=require
+
+
+mongodb: 

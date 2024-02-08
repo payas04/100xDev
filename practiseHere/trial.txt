@@ -2,3 +2,6 @@ hello this is txt
 
 now changed this text added to feature branch lets
 see what happens next
+
+
+FOREIGN KEY (department_id) REFERENCES department(department_id)
