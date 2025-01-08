@@ -4,7 +4,7 @@ import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "r
 import { countAtom, evenSelector } from "./store/atoms/count";
 
 function App() {
-  return (
+  return (  
     <div>
       <RecoilRoot>
         <Count />
