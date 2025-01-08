@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <div id = 'container'>
+        <h1>This is h1 in html </h1>
+        <h1> another h1 </h1>
+        <p>this is paragraph inside html</p>
+    </div>
+    <script> 
+        console.log("Accessing html eleents");
+        const container = document.getElementById('container');
+
+        const newParagraph = document.createElement('p');
+        newParagraph.textContent = " This P is created in DOM"
+        container.appendChild(newParagraph);
+
+        console.log(container);
+        const heading = container.querySelector('h1');
+        console.log(heading);
+        heading.textContent = " modified this heading form DOM"
+        const paragraph = container.querySelector('p');
+        console.log(paragraph);
+
+        console.log(heading.textContent);
+        console.log(heading.innerText); //Both are different innerText shows how text looks on screen in browser and textContent directly loads text from html
+        console.log(paragraph.textContent);
+
+        const something = document.querySelector("h1");//selects first h1 
+        console.log(something);
+    </script>
+</body>
+</html>
